@@ -75,11 +75,21 @@ function App() {
 
       <br></br>
 
-      {messages.map((msg, index) => (
-        <p key={index}>
-          <b>{msg.username}:</b> {msg.text}
-        </p>
-      ))}
+      {messages.map((msg, index) => {
+        const isOwnMessage = msg.username === username;
+
+        return (
+          <div
+            key={index}
+            className={`message-row ${isOwnMessage ? "own" : "other"}`}
+          >
+            <p className="message-bubble">
+              <b>{msg.username}</b>
+              {msg.text}
+            </p>
+          </div>
+        );
+      })}
     </>
   );
 }

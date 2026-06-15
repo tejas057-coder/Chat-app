@@ -167,39 +167,65 @@ br {
     display: none;
 }
 
-p {
+/* Message layout */
+.message-row {
+    display: flex;
+    width: 100%;
+    padding: 0 22px;
+    margin-top: 12px;
+}
+
+.message-row.other {
+    justify-content: flex-start;
+}
+
+.message-row.own {
+    justify-content: flex-end;
+}
+
+/* Message bubble */
+.message-bubble {
     width: fit-content;
-    max-width: calc(100% - 110px);
-    margin: 12px 22px;
+    max-width: min(78%, 520px);
+    margin: 0;
     padding: 12px 16px;
-    background: linear-gradient(180deg, #262626, #1f1f1f);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    color: var(--ig-text);
-    border-radius: 18px 18px 18px 6px;
     line-height: 1.45;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     word-break: break-word;
+    white-space: pre-wrap;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     animation: msgIn 0.25s ease;
 }
 
-p b {
+/* Incoming message */
+.message-row.other .message-bubble {
+    background: linear-gradient(180deg, #262626, #1f1f1f);
+    color: var(--ig-text);
+    border-radius: 18px 18px 18px 6px;
+    text-align: left;
+}
+
+/* Outgoing message */
+.message-row.own .message-bubble {
+    background: linear-gradient(180deg, rgba(0, 149, 246, 0.95), rgba(24, 119, 242, 0.92));
+    color: white;
+    border-radius: 18px 18px 6px 18px;
+    text-align: left;
+}
+
+.message-bubble b {
     display: block;
     margin-bottom: 5px;
-    color: #ffffff;
     font-size: 0.82rem;
     font-weight: 600;
     opacity: 0.88;
 }
 
-p:nth-of-type(even) {
-    margin-left: auto;
-    margin-right: 22px;
-    background: linear-gradient(180deg, rgba(0, 149, 246, 0.95), rgba(24, 119, 242, 0.92));
-    color: white;
-    border-radius: 18px 18px 6px 18px;
+.message-row.other .message-bubble b {
+    color: #ffffff;
 }
 
-p:nth-of-type(even) b {
+.message-row.own .message-bubble b {
     color: rgba(255, 255, 255, 0.92);
 }
 
@@ -258,14 +284,12 @@ p:nth-of-type(even) b {
         margin-left: 16px;
     }
 
-    p {
-        margin-left: 16px;
-        margin-right: 16px;
-        max-width: calc(100% - 70px);
+    .message-row {
+        padding: 0 16px;
     }
 
-    p:nth-of-type(even) {
-        margin-right: 16px;
+    .message-bubble {
+        max-width: calc(100% - 60px);
     }
 
     #root::after {
@@ -296,7 +320,7 @@ p:nth-of-type(even) b {
     }
 
     input,
-    p {
+    .message-bubble {
         font-size: 0.92rem;
     }
 
